@@ -38,10 +38,72 @@ const hotels = [
     tags: ["Eco Stay", "Watersports", "Sea View"],
     amenities: [WavesIcon, Wifi, Coffee],
   },
+  {
+    name: "Konkan Pearl Villas",
+    location: "Malvan",
+    img: hotel1,
+    price: 5200,
+    rating: 4.8,
+    reviews: 198,
+    tags: ["Sea View", "Pool", "Seafood"],
+    amenities: [WavesIcon, Wifi, Utensils],
+  },
+  {
+    name: "Harnai Bay Retreat",
+    location: "Dapoli",
+    img: hotel3,
+    price: 3800,
+    rating: 4.6,
+    reviews: 142,
+    tags: ["Cliffside", "Dolphin Tours", "Quiet"],
+    amenities: [WavesIcon, Wifi, Coffee],
+  },
+  {
+    name: "Alibaug Casa Mar",
+    location: "Alibaug",
+    img: hotel2,
+    price: 7800,
+    rating: 4.9,
+    reviews: 421,
+    tags: ["Luxury", "Private Pool", "Beachfront"],
+    amenities: [WavesIcon, Wifi, Utensils, Coffee],
+  },
+  {
+    name: "Ratnagiri Mango Inn",
+    location: "Ratnagiri",
+    img: hotel2,
+    price: 2800,
+    rating: 4.5,
+    reviews: 96,
+    tags: ["Budget", "Garden", "Local Food"],
+    amenities: [Utensils, Wifi],
+  },
+  {
+    name: "Murud Fort View",
+    location: "Murud",
+    img: hotel1,
+    price: 4100,
+    rating: 4.7,
+    reviews: 167,
+    tags: ["Fort View", "Beachfront", "Family"],
+    amenities: [WavesIcon, Wifi, Utensils],
+  },
+  {
+    name: "Vengurla Cove Cottages",
+    location: "Vengurla",
+    img: hotel3,
+    price: 3500,
+    rating: 4.6,
+    reviews: 78,
+    tags: ["Secluded", "Sunset Views"],
+    amenities: [WavesIcon, Wifi, Coffee],
+  },
 ];
 
 const Hotels = () => {
   const [selected, setSelected] = useState<typeof hotels[number] | null>(null);
+  const { location, setLocation } = useLocationFilter();
+  const filtered = location ? hotels.filter((h) => h.location === location) : hotels;
 
   return (
     <section id="hotels" className="py-24 md:py-32">
