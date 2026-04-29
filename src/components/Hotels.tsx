@@ -2,9 +2,10 @@ import { useState } from "react";
 import hotel1 from "@/assets/hotel-1.jpg";
 import hotel2 from "@/assets/hotel-2.jpg";
 import hotel3 from "@/assets/hotel-3.jpg";
-import { Star, MapPin, Wifi, Coffee, Waves as WavesIcon, Utensils } from "lucide-react";
+import { Star, MapPin, Wifi, Coffee, Waves as WavesIcon, Utensils, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BookingDialog from "./BookingDialog";
+import { useLocationFilter } from "@/context/LocationContext";
 
 const hotels = [
   {
