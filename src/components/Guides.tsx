@@ -2,15 +2,17 @@ import { useState } from "react";
 import guide1 from "@/assets/guide-1.jpg";
 import guide2 from "@/assets/guide-2.jpg";
 import guide3 from "@/assets/guide-3.jpg";
-import { Star, Languages, Award } from "lucide-react";
+import { Star, Languages, Award, MapPin, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BookingDialog from "./BookingDialog";
+import { useLocationFilter } from "@/context/LocationContext";
 
 const guides = [
   {
     name: "Rohan Sawant",
     img: guide1,
     region: "Sindhudurg & Malvan",
+    cities: ["Malvan", "Tarkarli", "Vengurla"],
     rating: 4.9,
     tours: 240,
     languages: ["English", "Marathi", "Hindi"],
@@ -22,6 +24,7 @@ const guides = [
     name: "Priya Naik",
     img: guide2,
     region: "Tarkarli & Devbagh",
+    cities: ["Tarkarli", "Malvan", "Vengurla"],
     rating: 5.0,
     tours: 180,
     languages: ["English", "Marathi", "Konkani"],
@@ -33,6 +36,7 @@ const guides = [
     name: "Vasant Dada",
     img: guide3,
     region: "Ganpatipule & Ratnagiri",
+    cities: ["Ganpatipule", "Ratnagiri", "Devgad"],
     rating: 4.8,
     tours: 410,
     languages: ["Marathi", "Hindi", "Konkani"],
@@ -40,10 +44,36 @@ const guides = [
     rate: 1500,
     bio: "Fisherman-turned-guide sharing 30+ years of local lore, mango groves, and home kitchens.",
   },
+  {
+    name: "Aditi Kulkarni",
+    img: guide2,
+    region: "Alibaug & Murud",
+    cities: ["Alibaug", "Murud"],
+    rating: 4.9,
+    tours: 156,
+    languages: ["English", "Marathi", "Hindi"],
+    specialty: "Sea Forts & Watersports",
+    rate: 2000,
+    bio: "Expert in Janjira and Kolaba forts, with kayak and parasailing tour partnerships.",
+  },
+  {
+    name: "Mahesh Pawar",
+    img: guide1,
+    region: "Dapoli & Harnai",
+    cities: ["Dapoli", "Ratnagiri"],
+    rating: 4.7,
+    tours: 198,
+    languages: ["English", "Marathi", "Hindi"],
+    specialty: "Dolphin Tours & Cliffs",
+    rate: 1700,
+    bio: "Runs sunrise dolphin boat tours and guided treks to Suvarnadurg fort.",
+  },
 ];
 
 const Guides = () => {
   const [selected, setSelected] = useState<typeof guides[number] | null>(null);
+  const { location, setLocation } = useLocationFilter();
+  const filtered = location ? guides.filter((g) => g.cities.includes(location)) : guides;
 
   return (
     <section id="guides" className="py-24 md:py-32 gradient-sand">
