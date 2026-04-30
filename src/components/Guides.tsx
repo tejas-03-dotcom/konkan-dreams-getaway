@@ -156,6 +156,7 @@ const Guides = () => {
         title={selected ? `Hire ${selected.name}` : ""}
         subtitle={selected ? `${selected.region} · ₹${selected.rate.toLocaleString("en-IN")}/day` : ""}
         type="guide"
+        item={selected ? { name: selected.name, location: selected.region, price: selected.rate } : null}
       />
     </section>
   );
