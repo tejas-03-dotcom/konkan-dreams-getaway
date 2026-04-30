@@ -183,6 +183,7 @@ const Hotels = () => {
         title={selected ? `Book ${selected.name}` : ""}
         subtitle={selected ? `${selected.location} · ₹${selected.price.toLocaleString("en-IN")}/night` : ""}
         type="hotel"
+        item={selected ? { name: selected.name, location: selected.location, price: selected.price } : null}
       />
     </section>
   );
