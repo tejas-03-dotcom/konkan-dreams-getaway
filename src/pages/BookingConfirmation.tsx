@@ -109,6 +109,28 @@ const BookingConfirmation = () => {
       ? nights * booking.price_per_unit * booking.guests
       : booking.price_per_unit * booking.guests;
 
+  const handleCancel = async () => {
+    if (!booking || !user) return;
+    setCancelling(true);
+    const { error } = await supabase
+      .from("bookings")
+      .update({ status: "cancelled" })
+      .eq("id", booking.id)
+      .eq("user_id", user.id);
+
+    if (error) {
+      toast.error("Failed to cancel reservation. Please try again.");
+      setCancelling(false);
+      return;
+    }
+
+    toast.success("Reservation cancelled successfully.");
+    setBooking({ ...booking, status: "cancelled" });
+    setCancelling(false);
+  };
+
+  const isConfirmed = booking.status === "confirmed";
+
   return (
     <>
       <Navbar />
