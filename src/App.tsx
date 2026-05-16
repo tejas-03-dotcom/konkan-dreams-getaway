@@ -7,6 +7,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import Index from "./pages/Index.tsx";
 import Auth from "./pages/Auth.tsx";
 import MyBookings from "./pages/MyBookings.tsx";
+import BookingConfirmation from "./pages/BookingConfirmation.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/my-bookings" element={<MyBookings />} />
+            <Route path="/booking-confirmation" element={<BookingConfirmation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
