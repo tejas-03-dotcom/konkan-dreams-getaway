@@ -51,6 +51,7 @@ const BookingConfirmation = () => {
   const { user, loading } = useAuth();
   const [booking, setBooking] = useState<Booking | null>(null);
   const [busy, setBusy] = useState(true);
+  const [cancelling, setCancelling] = useState(false);
 
   const bookingId = params.get("id");
 
