@@ -41,21 +41,24 @@ const BookingDialog = ({ open, onClose, title, subtitle, type, item }: Props) =>
     if (!item) return;
     const fd = new FormData(e.currentTarget);
     setBusy(true);
-    const { error } = await supabase.from("bookings").insert({
-      user_id: user.id,
-      booking_type: type,
-      item_name: item.name,
-      location: item.location,
-      start_date: String(fd.get("from")),
-      end_date: String(fd.get("to")),
-      guests: Number(fd.get("guests") ?? 1),
-      price_per_unit: item.price,
-    });
+    const { data, error } = await supabase
+      .from("bookings")
+      .insert({
+        user_id: user.id,
+        booking_type: type,
+        item_name: item.name,
+        location: item.location,
+        start_date: String(fd.get("from")),
+        end_date: String(fd.get("to")),
+        guests: Number(fd.get("guests") ?? 1),
+        price_per_unit: item.price,
+      })
+      .select("id")
+      .single();
     setBusy(false);
     if (error) return toast.error(error.message);
-    setConfirmed(true);
-    toast.success("Booking confirmed!", { description: "Find it under My Bookings." });
-    setTimeout(() => { setConfirmed(false); onClose(); }, 2200);
+    onClose();
+    navigate(`/booking-confirmation?id=${data.id}`);
   };
 
   return (
