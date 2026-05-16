@@ -215,15 +215,55 @@ const BookingConfirmation = () => {
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">Inclusive of taxes & fees</p>
                 </div>
-                <span
-                  className={`px-4 py-1.5 rounded-full text-sm font-semibold ${
-                    booking.status === "confirmed"
-                      ? "bg-tertiary/15 text-tertiary"
-                      : "bg-muted text-muted-foreground"
-                  }`}
-                >
-                  {booking.status}
-                </span>
+                <div className="flex items-center gap-3">
+                  {isConfirmed && (
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="text-destructive border-destructive/30 hover:bg-destructive/10 hover:text-destructive"
+                        >
+                          <XCircle className="w-4 h-4 mr-1" />
+                          Cancel
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle className="flex items-center gap-2">
+                            <AlertTriangle className="w-5 h-5 text-destructive" />
+                            Cancel Reservation?
+                          </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Are you sure you want to cancel your reservation at{" "}
+                            <strong>{booking.item_name}</strong>? This action cannot be undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Keep Reservation</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={handleCancel}
+                            disabled={cancelling}
+                            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                          >
+                            {cancelling ? "Cancelling…" : "Yes, Cancel"}
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  )}
+                  <span
+                    className={`px-4 py-1.5 rounded-full text-sm font-semibold ${
+                      booking.status === "confirmed"
+                        ? "bg-tertiary/15 text-tertiary"
+                        : booking.status === "cancelled"
+                          ? "bg-destructive/15 text-destructive"
+                          : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    {booking.status}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
